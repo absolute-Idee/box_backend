@@ -7,7 +7,7 @@ class TrainerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trainer
-        fields = ('id', 'surname', 'name', 'patronymic', 'raiting', 'experience', 'photo_url')
+        fields = ("__all__")
 
 
 class TrainingSerializer(serializers.ModelSerializer):
@@ -28,4 +28,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('id', 'trainer', 'trainer_name', 'trainer_surname', 'trainer_photo', 'title', 'image_url', 'trainings')
+        fields = ('id', 'trainer_id', 'trainer_name', 'trainer_surname', 'trainer_photo', 'title', 'description', 'image_url', 'trainings')
