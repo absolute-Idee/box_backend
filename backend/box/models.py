@@ -17,7 +17,7 @@ class Trainer(models.Model):
 class Course(models.Model):
     """Course table. Many courses to one trainer. One course to many trainings"""
 
-    trainer_id = models.ForeignKey(Trainer, related_name='courses', on_delete=models.CASCADE)
+    trainer = models.ForeignKey(Trainer, related_name='courses', on_delete=models.CASCADE)
     description = models.TextField()
     excersize_amount = models.IntegerField()
     title = models.CharField(max_length=100)
