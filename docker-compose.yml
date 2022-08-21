@@ -11,10 +11,37 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
+
   api:
     build: .
     container_name: api_container
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_NAME=djangoapp
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     command: python backend/manage.py runserver 0.0.0.0:5001
     ports: 
       - "5001:5001"
     restart: on-failure
+
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=djangoapp
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    container_name: db_container
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    ports:
+      - '5432:5432'
