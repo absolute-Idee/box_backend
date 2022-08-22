@@ -11,4 +11,6 @@ python backend/manage.py makemigrations box
 python backend/manage.py migrate
 python backend/manage.py migrate box
 
-uwsgi --socket :9000 --workers 4 --master --enable-threads --module backend.wsgi
+pwd
+
+uwsgi --chdir backend/ --socket :9000 --workers 4 --master --enable-threads --module backend.wsgi:application
