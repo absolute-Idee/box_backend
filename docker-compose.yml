@@ -18,6 +18,7 @@ services:
     depends_on:
       - db
     environment:
+      - SECRET_KEY=$SECRET_KEY
       - POSTGRES_NAME=$POSTGRES_NAME
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
@@ -26,7 +27,7 @@ services:
       - ALLOWED_HOSTS=$ALLOWED_HOSTS
     volumes:
       - ./data/db:/code/data/db
-    command: python backend/manage.py runserver 0.0.0.0:5001
+    command: bash -c "python backend/manage.py runserver 0.0.0.0:5001 && bash run.sh"
     ports: 
       - "5001:5001"
     restart: on-failure
