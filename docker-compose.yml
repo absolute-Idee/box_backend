@@ -24,6 +24,8 @@ services:
       - POSTGRES_HOST=$POSTGRES_HOST
       - POSTGRES_PORT=$POSTGRES_PORT
       - ALLOWED_HOSTS=$ALLOWED_HOSTS
+    volumes:
+      - ./data/db:/code/data/db
     command: python backend/manage.py runserver 0.0.0.0:5001
     ports: 
       - "5001:5001"
