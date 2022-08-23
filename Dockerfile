@@ -9,6 +9,6 @@ COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 
 COPY backend/ /code/backend
-COPY scripts/ /code/
+COPY py_scripts/ /code/
 
 #RUN bash run.sh
