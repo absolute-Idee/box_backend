@@ -96,6 +96,9 @@ DATABASES = {
     }
 }
 
+# CSRF_TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','http://localhost']
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
