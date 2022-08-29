@@ -40,7 +40,7 @@ class TrainerShortSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trainer
-        fields = ('surname', 'name', 'photo_url')
+        fields = ('id', 'surname', 'name', 'patronymic', 'photo_url')
 
 
 class CourseSerializer(serializers.ModelSerializer):
