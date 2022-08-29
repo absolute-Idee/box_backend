@@ -21,6 +21,7 @@ class Trainer(models.Model):
         )
     experience = models.IntegerField()
     photo_url = models.TextField()
+    info = models.TextField()
 
 class Course(models.Model):
     """Course table. Many courses to one trainer. One course to many trainings"""
