@@ -2,17 +2,17 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-class Messanger(models.Model):
-    """Table for messanger icons"""
+class Messenger(models.Model):
+    """Table for messenger icons"""
     
-    #trainers = models.ManyToManyField(Trainer, through='TrainerMessanger')
-    messanger = models.CharField(max_length=100)
+    #trainers = models.ManyToManyField(Trainer, through='TrainerMessenger')
+    messenger = models.CharField(max_length=100)
     icon_url = models.TextField()
 
 class Trainer(models.Model):
     """Trainer table. One trainer to many courses"""
 
-    messangers = models.ManyToManyField(Messanger, through='TrainerMessanger')
+    messengers = models.ManyToManyField(Messenger, through='TrainerMessenger')
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=100)
@@ -27,9 +27,9 @@ class Course(models.Model):
 
     trainer = models.ForeignKey(Trainer, related_name='courses', on_delete=models.CASCADE)
     description = models.TextField()
-    excersize_amount = models.IntegerField()
+    exercise_amount = models.IntegerField()
     title = models.CharField(max_length=100)
-    image_url = models.TextField()
+    photo_url = models.TextField()
 
 class Training(models.Model):
     """Training table. Many trainings to one course"""
@@ -41,9 +41,9 @@ class Training(models.Model):
     photo_url = models.TextField()
     video_url = models.TextField()
 
-class TrainerMessanger(models.Model):
-    """Connection table for many-to-many between Trainer table and Messanger table with nickname field for every trainer messanger"""
+class TrainerMessenger(models.Model):
+    """Connection table for many-to-many between Trainer table and Messenger table with nickname field for every trainer messenger"""
 
-    trainer = models.ForeignKey(Trainer, related_name='trainer_messanger', on_delete=models.CASCADE)
-    messanger = models.ForeignKey(Messanger, related_name='messanger_trainer', on_delete=models.CASCADE)
+    trainer = models.ForeignKey(Trainer, related_name='trainer_messenger', on_delete=models.CASCADE)
+    messenger = models.ForeignKey(Messenger, related_name='messenger_trainer', on_delete=models.CASCADE)
     nickname = models.CharField(max_length=100)

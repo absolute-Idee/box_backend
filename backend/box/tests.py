@@ -11,12 +11,12 @@ class TestTrainerModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Trainer.objects.create(surname='Urbaev', name='Max', patronymic='Gennadievich', raiting=4.4, experience=2, photo_url='fJSNjndnSfs')
+        Trainer.objects.create(surname='Urbaev', name='Max', patronymic='Gennadievich', rating=4.4, experience=2, photo_url='fJSNjndnSfs')
 
     def test_model_fields(self):
         trainer = Trainer.objects.get(id=1)
         self.assertEqual(trainer.name, 'Max')
-        self.assertEqual(trainer.raiting, 4.4)
+        self.assertEqual(trainer.rating, 4.4)
         self.assertEqual(trainer.experience, 2)
 
 
@@ -24,7 +24,7 @@ class TestGeetTrainers(APITestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Trainer.objects.create(surname='Urbaev', name='Max', patronymic='Gennadievich', raiting=4.4, experience=2, photo_url='fJSNjndnSfs')
+        Trainer.objects.create(surname='Urbaev', name='Max', patronymic='Gennadievich', rating=4.4, experience=2, photo_url='fJSNjndnSfs')
         # Course.objects.create(trainer_id=1, description='first course', excersize_amount=1, title='Trainer 1 course')
         # Training.objects.create(course_id=1, title='punches', description='punches training', duration='00:15:12')
 

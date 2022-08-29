@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Trainer, Course, Training, Messanger, TrainerMessanger
+from .models import Trainer, Course, Training, Messenger, TrainerMessenger
 
 # Register your models here.
 admin.site.register(Trainer)
 admin.site.register(Course)
 admin.site.register(Training)
-admin.site.register(Messanger)
-admin.site.register(TrainerMessanger)
+admin.site.register(Messenger)
+admin.site.register(TrainerMessenger)

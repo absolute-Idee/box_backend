@@ -1,34 +1,32 @@
-from pyexpat import model
-from .models import Training, Trainer, Course, TrainerMessanger, Messanger
+from .models import Training, Trainer, Course, TrainerMessenger, Messenger
 from rest_framework import serializers
 
 
-class MessangerSerializer(serializers.ModelSerializer):
+class MessengerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Messanger
-        fields = ('id', 'messanger', 'icon_url')
+        model = Messenger
+        fields = ('id', 'messenger', 'icon_url')
 
 
 class TMSerializer(serializers.ModelSerializer):
 
-    messanger = MessangerSerializer()
+    messenger = MessengerSerializer()
 
     class Meta:
-        model = TrainerMessanger
-        fields = ('messanger', 'nickname')
+        model = TrainerMessenger
+        fields = ('messenger', 'nickname')
 
 
 class TrainerSerializer(serializers.ModelSerializer):
     """Trainer table serializer"""
 
-    messangers = TMSerializer(many=True, source='trainer_messanger')
+    messengers = TMSerializer(many=True, source='trainer_messenger')
 
     class Meta:
         model = Trainer
-        fields = ('id', 'surname', 'name', 'patronymic', 'rating', 'experience', 'photo_url', 'messangers')
+        fields = ('id', 'surname', 'name', 'patronymic', 'rating', 'experience', 'photo_url', 'messengers')
         
-
 
 class TrainingSerializer(serializers.ModelSerializer):
     """Training table serializer"""
@@ -38,10 +36,11 @@ class TrainingSerializer(serializers.ModelSerializer):
         fields = ("__all__")
         
 
-class TrainerShortSerializer(serializers.Serializer):
-    trainer_name = serializers.CharField(read_only=True)
-    trainer_surname = serializers.CharField(read_only=True)
-    trainer_photo = serializers.CharField(read_only=True)
+class TrainerShortSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Trainer
+        fields = ('surname', 'name')
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -51,15 +50,10 @@ class CourseSerializer(serializers.ModelSerializer):
     # trainer_surname = serializers.CharField(read_only=True, source="trainer.surname")
     # trainer_photo = serializers.CharField(read_only=True, source="trainer.photo_url")
 
-    # def __init__(self, data, *args, **kwargs):
-    #     self.data = data
-    #     super().__init__(*args, **kwargs)
-
-
-
-    trainer_short = TrainerShortSerializer()
+    trainer = TrainerShortSerializer(read_only=True)
     trainings = TrainingSerializer(many=True)
 
     class Meta:
         model = Course
+        depth=1
         fields = ('id', 'description', 'trainer', 'title', 'image_url', 'trainings')
