@@ -31,6 +31,7 @@ class Course(models.Model):
     exercise_amount = models.IntegerField()
     title = models.CharField(max_length=100)
     photo_url = models.TextField()
+    readiness = models.BooleanField()
 
 class Training(models.Model):
     """Training table. Many trainings to one course"""
@@ -41,6 +42,7 @@ class Training(models.Model):
     duration = models.TimeField()
     photo_url = models.TextField()
     video_url = models.TextField()
+    video_ratio = models.FloatField()
 
 class TrainerMessenger(models.Model):
     """Connection table for many-to-many between Trainer table and Messenger table with nickname field for every trainer messenger"""
