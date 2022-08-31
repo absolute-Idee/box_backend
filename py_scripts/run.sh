@@ -4,12 +4,11 @@ set -e
 
 whoami
 
-#python manage.py wait_for_db
 #python manage.py collectstatic --noinput
-python backend/manage.py makemigrations
-python backend/manage.py makemigrations box
-python backend/manage.py migrate
-python backend/manage.py migrate box
+# python backend/manage.py makemigrations
+# python backend/manage.py makemigrations box
+# python backend/manage.py migrate
+# python backend/manage.py migrate box
 
 pwd
 
