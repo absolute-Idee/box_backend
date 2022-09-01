@@ -26,6 +26,7 @@ services:
       - ALLOWED_HOSTS=$ALLOWED_HOSTS
     volumes:
       - ./data/db:/code/data/db
+      - ./backend/:/code/backend
     command: bash -c "bash run.sh"
     # ports: 
     #   - "8000:8000"
