@@ -1,4 +1,4 @@
-2 endpoints already exist: api-box-app.fun/api/GetCourse api-box-app.fun/api/GetTrainer
+2 endpoints already exist: http://37.140.195.207/api/GetCourse http://37.140.195.207/api/GetTrainer
 
 start.sh script for docker installation and .env file creating
 
