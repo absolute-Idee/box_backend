@@ -43,7 +43,7 @@ class TrainerShortSerializer(serializers.ModelSerializer):
         fields = ('id', 'surname', 'name', 'patronymic', 'photo_url')
 
 
-class UnfinishedCourse(serializers.Serializer):
+class UnfinishedCourseSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     readiness = serializers.BooleanField()
     photo_url = serializers.CharField(style={'base_template': 'textarea.html'})

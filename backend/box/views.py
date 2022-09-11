@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import TrainerSerializer, CourseSerializer, UnfinishedCourse
+from .serializers import TrainerSerializer, CourseSerializer, UnfinishedCourseSerializer
 from .models import Course, Trainer
 
 
@@ -14,7 +14,7 @@ class GetCourseView(APIView):
         serializer_true = CourseSerializer(course_true, many=True)
 
         course_false = Course.objects.filter(readiness=False)
-        serializer_false = UnfinishedCourse(course_false, many=True)
+        serializer_false = UnfinishedCourseSerializer(course_false, many=True) 
 
         return Response(serializer_true.data + serializer_false.data)
 
