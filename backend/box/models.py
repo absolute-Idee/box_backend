@@ -33,9 +33,15 @@ class Course(models.Model):
     photo_url = models.TextField()
     readiness = models.BooleanField(default=True)
 
+class User(models.Model):
+    """User table"""
+
+    phone_num = models.CharField(max_length=20)
+    email = models.TextField()
+
 class Training(models.Model):
     """Training table. Many trainings to one course"""
-
+    user = models.ManyToManyField(User, through='TrainingUser')
     course = models.ForeignKey(Course, related_name='trainings', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -50,3 +56,10 @@ class TrainerMessenger(models.Model):
     trainer = models.ForeignKey(Trainer, related_name='trainer_messenger', on_delete=models.CASCADE)
     messenger = models.ForeignKey(Messenger, related_name='messenger_trainer', on_delete=models.CASCADE)
     nickname = models.CharField(max_length=100)
+
+class TrainingUser(models.Model):
+    """Connection table for many-to-many relationship. Also uses for like count"""
+
+    user = models.ForeignKey(User, related_name='user_training', on_delete=models.CASCADE)
+    training = models.ForeignKey(Training, related_name='training_user', on_delete=models.CASCADE)
+    like_status = models.BooleanField()

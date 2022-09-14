@@ -1,4 +1,5 @@
-from .models import Training, Trainer, Course, TrainerMessenger, Messenger
+from pyexpat import model
+from .models import Training, Trainer, Course, TrainerMessenger, Messenger, TrainingUser
 from rest_framework import serializers
 
 
@@ -26,14 +27,20 @@ class TrainerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trainer
         fields = ('id', 'surname', 'name', 'patronymic', 'rating', 'experience', 'photo_url', 'messengers', 'info')
-        
+
 
 class TrainingSerializer(serializers.ModelSerializer):
-    """Training table serializer"""
+    """Training table serializer. Likes field count users in training whose like_status is True, that is likes amount in the training"""
+
+    likes = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_likes(obj):
+        return TrainingUser.objects.filter(training_id=obj.id, like_status=True).count()
 
     class Meta:
         model = Training
-        fields = ("__all__")
+        fields = ('id', 'title', 'description', 'duration', 'photo_url', 'video_url', 'video_ratio', 'likes')
         
 
 class TrainerShortSerializer(serializers.ModelSerializer):
