@@ -1,4 +1,3 @@
-from pyexpat import model
 from .models import Training, Trainer, Course, TrainerMessenger, Messenger, TrainingUser
 from rest_framework import serializers
 

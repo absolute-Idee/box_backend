@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 
 class Messenger(models.Model):
@@ -36,6 +37,8 @@ class Course(models.Model):
 class UserProfile(models.Model):
     """User table"""
 
+    #user = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
+    username = models.TextField()
     phone_num = models.CharField(max_length=20)
     email = models.TextField()
 
