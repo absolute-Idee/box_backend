@@ -11,17 +11,13 @@ from .exceptions import *
 
 cred = credentials.Certificate(os.path.join(BASE_DIR, "test_cred.json"))
 
-# default_app = initialize_app(cred)
+default_app = initialize_app(cred)
 
-# uid = 'hnAYV5grCtSx8WD2VK9ifYw6BuK2'
-
-# custom_token = auth.create_custom_token(uid)
-# print(custom_token)
 
 class FirebaseBackend(authentication.BaseAuthentication):
     def authenticate(self, request):
         auth_header = request.META.get("HTTP_AUTHORIZATION")
-        print(auth_header)
+        #print(auth_header)
         if not auth_header:
             raise NoAuthToken("No auth token provided")
 
