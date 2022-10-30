@@ -3,6 +3,8 @@
 venv/
 data/
 
+*.json
+
 .env
 db.sqlite3
 

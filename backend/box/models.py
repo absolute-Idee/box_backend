@@ -1,12 +1,13 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 
 class Messenger(models.Model):
     """Table for messenger icons"""
     
     #trainers = models.ManyToManyField(Trainer, through='TrainerMessenger')
-    messenger = models.CharField(max_length=100)
+    messenger_name = models.CharField(max_length=100)
     icon_url = models.TextField()
 
 class Trainer(models.Model):
@@ -16,8 +17,8 @@ class Trainer(models.Model):
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=100)
-    rating = models.FloatField(
-        validators=[MinValueValidator(0), MaxValueValidator(5.0)]
+    rating = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
         )
     experience = models.IntegerField()
     photo_url = models.TextField()
@@ -33,15 +34,17 @@ class Course(models.Model):
     photo_url = models.TextField()
     readiness = models.BooleanField(default=True)
 
-class User(models.Model):
+class UserProfile(models.Model):
     """User table"""
 
+    #user = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
+    username = models.TextField()
     phone_num = models.CharField(max_length=20)
     email = models.TextField()
 
 class Training(models.Model):
     """Training table. Many trainings to one course"""
-    user = models.ManyToManyField(User, through='TrainingUser')
+    user = models.ManyToManyField(UserProfile, through='TrainingUser')
     course = models.ForeignKey(Course, related_name='trainings', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -60,6 +63,6 @@ class TrainerMessenger(models.Model):
 class TrainingUser(models.Model):
     """Connection table for many-to-many relationship. Also uses for like count"""
 
-    user = models.ForeignKey(User, related_name='user_training', on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, related_name='user_training', on_delete=models.CASCADE)
     training = models.ForeignKey(Training, related_name='training_user', on_delete=models.CASCADE)
     like_status = models.BooleanField()

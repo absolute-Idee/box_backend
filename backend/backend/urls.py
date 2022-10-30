@@ -21,4 +21,5 @@ from rest_framework import routers
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('box.urls')),
+    path('test/', include('firebase.urls')),
 ]
