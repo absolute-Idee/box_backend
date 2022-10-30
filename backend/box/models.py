@@ -7,7 +7,7 @@ class Messenger(models.Model):
     """Table for messenger icons"""
     
     #trainers = models.ManyToManyField(Trainer, through='TrainerMessenger')
-    messenger = models.CharField(max_length=100)
+    messenger_name = models.CharField(max_length=100)
     icon_url = models.TextField()
 
 class Trainer(models.Model):
@@ -17,8 +17,8 @@ class Trainer(models.Model):
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=100)
-    rating = models.FloatField(
-        validators=[MinValueValidator(0), MaxValueValidator(5.0)]
+    rating = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
         )
     experience = models.IntegerField()
     photo_url = models.TextField()
