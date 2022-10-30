@@ -47,9 +47,19 @@ class Training(models.Model):
     user = models.ManyToManyField(UserProfile, through='TrainingUser')
     course = models.ForeignKey(Course, related_name='trainings', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    description = models.TextField()
-    duration = models.TimeField()
     photo_url = models.TextField()
+    description = models.TextField()
+
+class Exercise(models.Model):
+    """Exercise table. Many exercises to one Training"""
+    CHOICES = (
+        ('Lecture', 'Lecture'),
+        ('Practice', 'Practice'),
+    )
+
+    training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
+    type = models.CharField(max_length=20, choices=CHOICES)
+    duration = models.TimeField()
     video_url = models.TextField()
     video_ratio = models.FloatField(default=0.5)
 

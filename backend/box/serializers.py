@@ -1,4 +1,4 @@
-from .models import Training, Trainer, Course, TrainerMessenger, Messenger, TrainingUser
+from .models import Training, Trainer, Course, TrainerMessenger, Messenger, TrainingUser, Exercise
 from rest_framework import serializers
 
 
@@ -28,10 +28,19 @@ class TrainerSerializer(serializers.ModelSerializer):
         fields = ('id', 'surname', 'name', 'patronymic', 'rating', 'experience', 'photo_url', 'messengers', 'info')
 
 
+class ExerciseSerializer(serializers.ModelSerializer):
+    """Exercise table serializer"""
+
+    class Meta:
+        model = Exercise
+        fields = ('id', 'type', 'duration', 'video_url', 'video_ratio')
+
+
 class TrainingSerializer(serializers.ModelSerializer):
     """Training table serializer. Likes field count users in training whose like_status is True, that is likes amount in the training"""
 
-    likes = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField() 
+    exercises = ExerciseSerializer(many=True)
 
     @staticmethod
     def get_likes(obj):
@@ -39,7 +48,7 @@ class TrainingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Training
-        fields = ('id', 'title', 'description', 'duration', 'photo_url', 'video_url', 'video_ratio', 'likes')
+        fields = ('id', 'title', 'description', 'likes', 'photo_url', 'exercises')
         
 
 class TrainerShortSerializer(serializers.ModelSerializer):
