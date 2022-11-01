@@ -6,7 +6,7 @@ class MessengerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Messenger
-        fields = ('id', 'messenger', 'icon_url')
+        fields = ('id', 'messenger_name', 'icon_url')
 
 
 class TMSerializer(serializers.ModelSerializer):
