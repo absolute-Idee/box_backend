@@ -49,17 +49,17 @@ class Training(models.Model):
     title = models.CharField(max_length=100)
     photo_url = models.TextField()
     description = models.TextField()
+    duration = models.IntegerField(default=60)
 
 class Exercise(models.Model):
     """Exercise table. Many exercises to one Training"""
-    CHOICES = (
-        ('Lecture', 'Lecture'),
-        ('Practice', 'Practice'),
-    )
+    class Type(models.IntegerChoices):
+        LECTURE = 0
+        PRACTICE = 1
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
-    type = models.CharField(max_length=20, choices=CHOICES)
-    duration = models.TimeField()
+    type = models.IntegerField(choices=Type.choices)
+    duration = models.IntegerField(default=60)
     video_url = models.TextField()
     video_ratio = models.FloatField(default=0.5)
 
