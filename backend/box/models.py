@@ -57,8 +57,8 @@ class Exercise(models.Model):
         PRACTICE = 1
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
-    exercise_type = models.IntegerField(max_length=20, choices=Choises.choices, blank=True)
-    duration = models.IntegerField(blank=True)
+    exercise_type = models.IntegerField(max_length=20, choices=Choises.choices, blank=True, default=1)
+    duration = models.IntegerField(blank=True, default=60)
     video_url = models.TextField()
     video_ratio = models.FloatField(default=0.5)
 
