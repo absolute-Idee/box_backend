@@ -55,7 +55,7 @@ class Exercise(models.Model):
     """Exercise table. Many exercises to one Training"""
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
-    type = models.IntegerField(
+    exercise_type = models.IntegerField(
         default=1,
         validators=[MinValueValidator(0), MaxValueValidator(1)]
         )
