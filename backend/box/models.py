@@ -53,12 +53,11 @@ class Training(models.Model):
 
 class Exercise(models.Model):
     """Exercise table. Many exercises to one Training"""
-    class Type(models.IntegerChoices):
-        LECTURE = 0
-        PRACTICE = 1
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
-    type = models.IntegerField(choices=Type.choices)
+    type = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(1)]
+        )
     duration = models.IntegerField(default=60)
     video_url = models.TextField()
     video_ratio = models.FloatField(default=0.5)
