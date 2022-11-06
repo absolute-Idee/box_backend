@@ -56,6 +56,7 @@ class Exercise(models.Model):
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
     type = models.IntegerField(
+        default=1,
         validators=[MinValueValidator(0), MaxValueValidator(1)]
         )
     duration = models.IntegerField(default=60)
