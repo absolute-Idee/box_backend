@@ -58,8 +58,8 @@ class Exercise(models.Model):
     )
 
     training = models.ForeignKey(Training, related_name='exercises', on_delete=models.CASCADE)
-    type = models.CharField(max_length=20, choices=CHOICES)
-    duration = models.TimeField()
+    type = models.CharField(max_length=20, choices=CHOICES, blank=True)
+    duration = models.TimeField(blank=True)
     video_url = models.TextField()
     video_ratio = models.FloatField(default=0.5)
 
