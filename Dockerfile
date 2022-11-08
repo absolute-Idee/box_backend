@@ -7,7 +7,7 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN apk add --upgrade --no-cache build-base linux-headers && \
+RUN apt-get update && apt-get install -y \
     pip install --upgrade pip && \
     pip install -r /requirements.txt
 
