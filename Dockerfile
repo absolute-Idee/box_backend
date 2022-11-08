@@ -7,8 +7,9 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN apk add --upgrade --no-cache build-base linux-headers && \
+    pip install --upgrade pip && \
+    pip install -r /requirements.txt
 
 COPY backend/ /code/backend
 COPY py_scripts/ /code/
