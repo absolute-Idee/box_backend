@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
-# Waits for proxy to be available, then gets the first cert.
+# Waits for proxy to be available, then gets the first certificate.
 
 set -e
 
-until nc -z proxy:80; do
-    echo "Waiting for porxy..."
+until nc -z proxy 80; do
+    echo "Waiting for proxy..."
     sleep 5s & wait ${!}
 done
 

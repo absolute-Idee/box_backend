@@ -7,8 +7,7 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN apt-get update && apt-get install -y \
-    pip install --upgrade pip && \
+RUN pip install --upgrade pip && \
     pip install -r /requirements.txt
 
 COPY backend/ /code/backend
