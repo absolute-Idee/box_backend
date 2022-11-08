@@ -50,6 +50,7 @@ class Training(models.Model):
     photo_url = models.TextField()
     description = models.TextField()
     duration = models.IntegerField(blank=True, default=60)
+    duration = models.IntegerField(default=60)
 
 class Exercise(models.Model):
     """Exercise table. Many exercises to one Training"""
