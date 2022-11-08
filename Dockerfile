@@ -8,7 +8,7 @@ WORKDIR /code
 COPY requirements.txt /code/
 
 RUN pip install --upgrade pip && \
-    pip install -r /requirements.txt
+    pip install -r requirements.txt
 
 COPY backend/ /code/backend
 COPY py_scripts/ /code/
