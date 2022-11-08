@@ -9,7 +9,7 @@ ENV APP_PORT=9000
 
 USER root
 
-RUN apt install openssl bash
+RUN apk add --no-cache openssl bash
 RUN chmod +x /run.sh
 
 VOLUME /vol/static
