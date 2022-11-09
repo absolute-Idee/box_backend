@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-from pickle import TRUE
 
 from dotenv import load_dotenv
 from pathlib import Path
@@ -112,7 +111,7 @@ DATABASES = {
 # }
 
 # CSRF_TRUSTED_ORIGINS
-CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','http://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','http://localhost','https://www.api-box-app.fun']
 
 
 # Password validation
